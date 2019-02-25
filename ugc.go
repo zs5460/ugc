@@ -2,27 +2,28 @@ package ugc
 
 import (
 	"bytes"
+	"io/ioutil"
+
 	"golang.org/x/text/encoding/simplifiedchinese"
 	"golang.org/x/text/transform"
-	"io/ioutil"
 )
 
 // GTU ...
 func GTU(s []byte) ([]byte, error) {
 	reader := transform.NewReader(bytes.NewReader(s), simplifiedchinese.GBK.NewDecoder())
-	d, e := ioutil.ReadAll(reader)
-	if e != nil {
-		return nil, e
+	data, err := ioutil.ReadAll(reader)
+	if err != nil {
+		return nil, err
 	}
-	return d, nil
+	return data, nil
 }
 
 // UTG ...
 func UTG(s []byte) ([]byte, error) {
 	reader := transform.NewReader(bytes.NewReader(s), simplifiedchinese.GBK.NewEncoder())
-	d, e := ioutil.ReadAll(reader)
-	if e != nil {
-		return nil, e
+	data, err := ioutil.ReadAll(reader)
+	if err != nil {
+		return nil, err
 	}
-	return d, nil
+	return data, nil
 }
