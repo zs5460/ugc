@@ -8,9 +8,10 @@ import (
 	"golang.org/x/text/transform"
 )
 
-// GTU ...
+// GTU Decode a GBK string to UTF-8
 func GTU(s []byte) ([]byte, error) {
-	reader := transform.NewReader(bytes.NewReader(s), simplifiedchinese.GBK.NewDecoder())
+	reader := transform.NewReader(bytes.NewReader(s),
+		simplifiedchinese.GBK.NewDecoder())
 	data, err := ioutil.ReadAll(reader)
 	if err != nil {
 		return nil, err
@@ -18,9 +19,10 @@ func GTU(s []byte) ([]byte, error) {
 	return data, nil
 }
 
-// UTG ...
+// UTG Encode a UTF-8 string to GBK
 func UTG(s []byte) ([]byte, error) {
-	reader := transform.NewReader(bytes.NewReader(s), simplifiedchinese.GBK.NewEncoder())
+	reader := transform.NewReader(bytes.NewReader(s),
+		simplifiedchinese.GBK.NewEncoder())
 	data, err := ioutil.ReadAll(reader)
 	if err != nil {
 		return nil, err
